@@ -1,3 +1,5 @@
 name: mitchelldavis.github.io 
+description: My musings on code and tinkering with code
+url: http://mitchelldavis.github.io
 markdown: redcarpet
 pygments: true
