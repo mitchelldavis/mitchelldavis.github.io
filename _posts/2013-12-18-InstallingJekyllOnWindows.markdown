@@ -42,23 +42,23 @@ Once installed, navigate to the location the DevKit was installed.
 
 Within there, execute the following into the console:
 
-```console
+{% highlight bash %}
 ruby dk.rb init
-```
+{% endhighlight %}
 
 This command will generate a *config.yml* file within the working directory.  This file is used to determine which installation of ruby you want to install the DevKit into.  Just in case you have multiple versions of ruby installed on your machine.  If you open the file, you'll see some instructions on how to make sure that the version of ruby you installed in the previous step is listed in the *config.yml* file.  Make sure that is the case then execute the following command:
 
-```console
+{% highlight bash %}
 ruby dk.rb install
-```
+{% endhighlight %}
 
 **Install Jekyll**
 
 Once we have Ruby and it's DevKit installed, installing Jekyll is easy.  Simply type the following into the console:
 
-```console
+{% highlight bash %}
 gem install jekyll
-```
+{% endhighlight %}
 
 This will install a lot of prerequisites before it gets to the actual Jekyll gem.
 
@@ -68,26 +68,57 @@ This step is where I kept tripping up.  The *Jekyll* gem relies on the *Pygments
 
 Type the following into your console:
 
-```console
+{% highlight bash %}
 gem list --local
-```
+{% endhighlight %}
 
 This command will list out all of the gems that you have installed on your machine.  Find and note the version of the *Pygments.rb* gem.  You'll need it in the next command.
 
-```console
+{% highlight bash %}
 gem uninstall Pygments.rb --version "=(version)"
-```
+{% endhighlight %}
 
 So, if the version you have installed is 0.5.4, then the command would become:
 
-```console
+{% highlight bash %}
 gem uninstall Pygments.rb --version "=0.5.4"
-```
+{% endhighlight %}
 
 The version of *Pygments.rb* that will work with Windows is version 0.5.0.  So, let's install it with the next command.
 
-```console
+{% highlight bash %}
 gem install Pygments.rb --version "=0.5.0"
-```
+{% endhighlight %}
 
 Once it's installed you should be able to start using Jekyll.  Refer to the [Jekyll](http://jekyllrb.com/) documentation on how to start you're own Jekyll static website.
+
+**UPDATE**
+
+Well, I was wrong.  I thought I covered everything but it turns out we need [Python](http://www.python.org) as well.
+
+In order to do any syntax highlighting *Pygments.rb* calls *Python's Pygments* which does the actual highlighting.
+
+Download and install [Python Version 2.7.6](http://www.python.org/download/releases/2.7.6/).  Once installed, make sure that the path to the python executable has been added to your machine's *Path* environment variable.
+
+Copy the contents of [this (ez_install.py)](https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py) file onto you file system. If you name it *ez_install.py* then run:
+
+{% highlight bash %}
+python ez_install.py
+{% endhighlight %}
+
+That command will install python's [Setup Tools](https://pypi.python.org/pypi/setuptools) and place some executable's within the *Scripts* directory in your python root directory.  Navigate to that directory now.  Once there run the following command:
+
+{% highlight bash %}
+easy_install Pygments
+{% endhighlight %}
+
+That command installs python's version of *Pygments* which, as stated earlier, is what *Pygments.rb* calls to do syntax highlighting.
+
+My bad about forgetting the python parts of this walkthrough.  As far as I can tell, you can still use Jekyll without *Python*.  However, once you start using syntax highlighting, you'll start seeing errors.
+
+**Note:**
+
+I noticed that if you try and use the *--watch* switch on the jekyll command line, it will error.  Hmmm.... If I figure that one out, I'll post the resolution here.
+
+Happy Blogging.
+
