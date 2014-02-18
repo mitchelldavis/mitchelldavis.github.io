@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "PSAL"
-date:   2013-12-16
+date:   2014-02-18
 categories: PowerShell 
 ---
 
@@ -9,6 +9,30 @@ President's Day presented a long weekend for me this last weekend.  I had alread
 
 What came out of this is [PSAL](http://mitchelldavis.github.io/PSAL/)-*PowerShell Abstraction Layer*.  This is a simple module that, once imported, has a few cmdlets that can be used to interact with an abstraction layer.
 
+{% highlight PowerShell %}
+Import-Module .\psal.psm1
+# To see a simple write up of how to use the module.
+Get-Help about_PSAL
+{% endhighlight %}
+
+**Some of the Commands**
+
 - `Disable-AbstractionLayer`: This cmdlets will turn off the abstraction layer.  By default it is already turned off.
 - `Enable-AbstractionLayer`: This cmdlet will turn on the abstraction layer.
-- `New-Abstraction`: This cmdlet is the meat of the module.  With this you can 
+- `New-Abstraction`: This cmdlet is the meat of the module.  With this you can create abstractions of existing commands and functions.
+
+**An Example**
+
+{% highlight PowerShell %}
+Import-Module .\psal.psm1
+New-Abstraction "Invoke-Command"
+
+#Now Call the Abstracted command.  It's always postfixed with 'Abstraction'.
+Invoke-CommandAbstraction "TestServer" .\TestScript.ps1
+{% endhighlight %}
+
+Notice, this small script will execute the *TestScript.ps1* script on the *TestServer* because the abstraction layer is off by default.  Mix in an `Enable-AbstractionLayer` and the command will be properly abstracted so that the *TestServer* machine is never touched.
+
+**Credit where credit is due...**
+
+I want to give a shout out to [@scottmuc](https://github.com/scottmuc) for his work with [Pester](https://github.com/pester/Pester).  Not only do I use it to test the PSAL module, I also got some inpiriation from the [Mocking](https://github.com/pester/Pester/blob/master/en-US/about_Mocking.help.txt) framework within Pester.

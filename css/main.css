@@ -207,12 +207,13 @@ code {
   box-shadow: 3px 3px 5px #888888;*/
   /*border: 1px solid #ddd;
   background-color: #394034;*/
-  padding: 0.2em;
-  color: white;
+  /*padding: 0.2em;*/
+  /*color: white;*/
 }
 
 .post pre code {
   border: none;
+  color: white;
 }
 
 /* terminal */
