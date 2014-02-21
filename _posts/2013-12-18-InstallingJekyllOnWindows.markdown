@@ -122,3 +122,7 @@ I noticed that if you try and use the *--watch* switch on the jekyll command lin
 
 Happy Blogging.
 
+**UPDATE (2/21/2014)**
+
+I ran across the [Bootstrap](https://github.com/twbs/bootstrap) project today and within it's *Readme.md* was [this](https://github.com/juthilo/run-jekyll-on-windows/) link.  I have not ran it to validate that it is acurate, but I assume it is if *Bootstrap* is referencing it.
+
